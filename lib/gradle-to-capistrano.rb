@@ -1,0 +1,1 @@
+require 'capistrano/recipes/deploy/strategy/gradle_build'

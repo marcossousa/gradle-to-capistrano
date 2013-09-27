@@ -1,16 +1,29 @@
-= gradle-to-capistrano
+= gradle-to-capistrano gem
 
-Description goes here.
+This project is used to integrate gradle projects with capistrano deploy scripts.
 
-== Contributing to gradle-to-capistrano
- 
-* Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
-* Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it.
-* Fork the project.
-* Start a feature/bugfix branch.
-* Commit and push until you are happy with your contribution.
-* Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
-* Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+First install the gem:
+`gem install gradle-to-capistrano`
+
+Configure your gradle file with:
+
+    project(':my-fucking-owesome-project') {
+      apply plugin:'application'
+
+      distTar {
+        archiveName = "$tarName"
+      }
+    }
+
+And just set `:deploy_via` to `gradle_build`:
+
+    set :deploy_via, :gradle_build
+    set :gradle_cmd, ":my-fucking-owesome-project:distTar -PtarName={release_name}"
+    set :gradle_home, "/opt/gradle-1.8/bin"
+
+Cool! Now you can deploy you gradle application.
+
+Comments and suggestions are appreciated :)
 
 == Copyright
 

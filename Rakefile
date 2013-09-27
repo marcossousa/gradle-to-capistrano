@@ -17,11 +17,10 @@ Jeweler::Tasks.new do |gem|
   gem.name = "gradle-to-capistrano"
   gem.homepage = "http://github.com/marcossousa/gradle-to-capistrano"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
-  gem.email = "marcos.sousa@corp.globo.com"
+  gem.summary = %Q{Capistrano recipe to run gradle commands to generate deployable artifacts}
+  gem.description = %Q{This extension should be used to run gradle commands on gradle based projects. The artifacts generated will be compreessed and copied to the server}
+  gem.email = "falecomigo@marcossousa.com"
   gem.authors = ["Marcos Sousa"]
-  # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new
 
