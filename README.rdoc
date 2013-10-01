@@ -3,7 +3,7 @@
 This project is used to integrate gradle projects with capistrano deploy scripts.
 
 First install the gem:
-`gem install gradle-to-capistrano`
+    gem install gradle-to-capistrano
 
 Configure your gradle file with:
 
@@ -17,7 +17,7 @@ Configure your gradle file with:
       }
     }
 
-And just set `:deploy_via` to `gradle_build`:
+And just set :deploy_via to gradle_build:
 
     set :deploy_via, :gradle_build
     set :gradle_cmd, ":my-fucking-owesome-project:distTar -PtarName={release_name}"
