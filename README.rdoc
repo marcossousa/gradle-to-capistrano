@@ -11,7 +11,9 @@ Configure your gradle file with:
       apply plugin:'application'
 
       distTar {
-        archiveName = "$tarName"
+        if (project.hasProperty("tarName")) {
+          archiveName = "$tarName"
+        }
       }
     }
 
@@ -20,6 +22,7 @@ And just set `:deploy_via` to `gradle_build`:
     set :deploy_via, :gradle_build
     set :gradle_cmd, ":my-fucking-owesome-project:distTar -PtarName={release_name}"
     set :gradle_home, "/opt/gradle-1.8/bin"
+    set :gradle_working_dir, "my-fucking-owesome-project"
 
 Cool! Now you can deploy you gradle application.
 

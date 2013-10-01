@@ -6,8 +6,12 @@ module Capistrano
       class GradleBuild < Copy
         def deploy!
           execute "Running gradle build command" do
-            run_locally "#{gradle_home}/gradle #{gradle_cmd.gsub!('{release_name}', "#{File.basename(destination)}.tar")}"
-            run_locally "mv build/distributions/#{File.basename(destination)}.tar /tmp/"
+            unless self.gradle_working_dir
+              set :gradle_working_dir, "./"
+            end
+
+            run_locally "cd #{gradle_working_dir} && #{gradle_home}/gradle #{gradle_cmd.gsub!('{release_name}', "#{File.basename(destination)}.tar")}"
+            run_locally "cd #{gradle_working_dir} && mv build/distributions/#{File.basename(destination)}.tar /tmp/"
           end
 
           execute "Decompressing gradle build to put REVISON file" do
@@ -21,7 +25,7 @@ module Capistrano
         end
 
         def rollback_changes
-          run_locally "rm -rf build/distributions/*"
+          run_locally "cd #{gradle_working_dir} && rm -rf build/distributions/*"
           run_locally "rm -rf /tmp/#{File.basename(destination)}*"
         end
       end
