@@ -15,7 +15,7 @@ module Capistrano
           end
 
           execute "Decompressing gradle build to put REVISON file" do
-            run_locally "cd #{copy_dir} && tar -xf #{copy_dir}#{File.basename(destination)}.tar"
+            run_locally "cd #{copy_dir} && tar -xf #{copy_dir}/#{File.basename(destination)}.tar"
           end
           create_revision_file
           compress_repository
@@ -26,7 +26,7 @@ module Capistrano
 
         def rollback_changes
           run_locally "cd #{gradle_working_dir} && rm -rf build/distributions/*"
-          run_locally "rm -rf #{copy_dir}#{File.basename(destination)}*"
+          run_locally "rm -rf #{copy_dir}/#{File.basename(destination)}*"
         end
       end
     end
