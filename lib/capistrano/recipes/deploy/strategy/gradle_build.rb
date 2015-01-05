@@ -14,11 +14,10 @@ module Capistrano
             run_locally "cd #{gradle_working_dir} && mv build/distributions/#{File.basename(destination)}.tar #{copy_dir}"
           end
 
-          execute "Decompressing gradle build to put REVISON file" do
-            run_locally "cd #{copy_dir} && tar -xf #{copy_dir}/#{File.basename(destination)}.tar"
-          end
+          run_locally "mkdir #{copy_dir}/#{File.basename(destination)}"
           create_revision_file
-          compress_repository
+          run_locally "tar rf #{copy_dir}/#{File.basename(destination)}.tar #{copy_dir}/#{File.basename(destination)}/REVISION"
+          run_locally "gzip #{copy_dir}/#{File.basename(destination)}.tar"
           distribute!
         ensure
           rollback_changes
